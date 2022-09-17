@@ -4,9 +4,8 @@ const UserRepo = require("../repos/user-repo");
 const router = express.Router();
 
 router.get("/users", async (req, res) => {
-  // Run a query to get all users
   const users = await UserRepo.find();
-  // Send the result back to the request issuer
+  if (!users) return res.sendStatus(404);
   res.send(users);
 });
 
@@ -20,6 +19,7 @@ router.get("/users/:id", async (req, res) => {
 router.post("/users", async (req, res) => {
   const { username, bio } = req.body;
   const user = await UserRepo.insert(username, bio);
+  if (!user) return res.sendStatus(403);
   res.send(user);
 });
 
