@@ -4,17 +4,18 @@ exports.shorthands = undefined;
 
 exports.up = (pgm) => {
   pgm.sql(`
-        CREATE TABLE comments(
+        CREATE TABLE users(
             id SERIAL PRIMARY KEY,
             created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-            contents VARCHAR(240) NOT NULL
+            username VARCHAR(30) NOT NULL,
+            bio VARCHAR(240)
         );
     `);
 };
 
 exports.down = (pgm) => {
   pgm.sql(`
-        DROP TABLE comments;
+        DROP TABLE users;
     `);
 };
